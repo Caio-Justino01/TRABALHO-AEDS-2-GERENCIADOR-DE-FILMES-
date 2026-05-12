@@ -9,4 +9,4 @@ TFilme *buscaSequencialFilme(int chave, FILE *in, int *comparacoes);
 // Retorna ponteiro para o usuario encontrado ou NULL
 TUsuario *buscaSequencialUsuario(int chave, FILE *in, int *comparacoes);
 
-#endif // BUSCASEQUENCIAL_H_INCLUDED
+#endif 

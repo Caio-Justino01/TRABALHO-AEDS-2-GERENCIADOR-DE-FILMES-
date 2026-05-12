@@ -13,16 +13,16 @@ typedef struct Usuario {
     char email[50];
 } TUsuario;
 
-// Cria usuario
+// cria usuario
 TUsuario *criarUsuario(int id, char *nome, char *email);
 
-// Salva usuario no arquivo out, na posicao atual do cursor
+// calva usuario no arquivo out, na posicao atual do cursor
 void salvaUsuario(TUsuario *usuario, FILE *out);
 
-// Le um usuario do arquivo in na posicao atual do cursor
+// le um usuario do arquivo in na posicao atual do cursor
 TUsuario *leUsuario(FILE *in);
 
-// Imprime usuario
+// imprime usuario
 void imprimeUsuario(TUsuario *usuario);
 
 // Retorna tamanho do registro de usuario em bytes
@@ -40,4 +40,4 @@ void imprimirBaseUsuarios(FILE *out);
 // Retorna quantidade de registros no arquivo
 int tamanhoArquivoUsuarios(FILE *arq);
 
-#endif // USUARIO_H_INCLUDED
+#endif 

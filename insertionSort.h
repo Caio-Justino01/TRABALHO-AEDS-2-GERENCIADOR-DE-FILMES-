@@ -7,4 +7,4 @@ void insertionSortFilmes(FILE *arq, int tam);
 // Ordena arquivo de usuarios por id usando insertion sort
 void insertionSortUsuarios(FILE *arq, int tam);
 
-#endif // INSERTIONSORT_H_INCLUDED
+#endif 

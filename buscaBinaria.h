@@ -7,4 +7,4 @@ TFilme *buscaBinariaFilme(int chave, FILE *in, int inicio, int fim, int *compara
 // Busca binaria por um usuario na base de dados ordenada
 TUsuario *buscaBinariaUsuario(int chave, FILE *in, int inicio, int fim, int *comparacoes);
 
-#endif // BUSCABINARIA_H_INCLUDED
+#endif 

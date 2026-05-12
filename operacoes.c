@@ -7,14 +7,32 @@
 
 // Cadastrar um novo filme na base
 void cadastrarFilme(FILE *arqFilmes) {
-    int id, ano;
+    int id, ano, comparacoes;
     char titulo[100], diretor[50], genero[30];
     float nota;
-
+// coletar os ddados de filme na ram
     printf("\n--- Cadastrar Filme ---\n");
     printf("ID: ");
     scanf("%d", &id);
     getchar();
+
+    // Verifica se o ID ja existe na base antes de cadastrar
+    TFilme *existente = buscaSequencialFilme(id, arqFilmes, &comparacoes);
+    if (existente != NULL) {
+        printf("Erro: Ja existe um filme com ID %d na base!\n", id);
+        free(existente);
+        // Encontra o maior ID na base para sugerir o proximo disponivel
+        rewind(arqFilmes);
+        int maiorId = 0;
+        TFilme *tmp;
+        while ((tmp = leFilme(arqFilmes)) != NULL) {
+            if (tmp->id > maiorId) maiorId = tmp->id;
+            free(tmp);
+        }
+        printf("Sugestao: o proximo ID disponivel e %d\n", maiorId + 1);
+        return;
+    }
+
     printf("Titulo: ");
     fgets(titulo, 100, stdin);
     titulo[strcspn(titulo, "\n")] = '\0';
@@ -30,26 +48,35 @@ void cadastrarFilme(FILE *arqFilmes) {
     printf("Nota: ");
     scanf("%f", &nota);
 
-    TFilme *f = criarFilme(id, titulo, diretor, ano, genero, nota);
+    TFilme *f = criarFilme(id, titulo, diretor, ano, genero, nota);// na ram
 
     // Posiciona no final do arquivo e salva
     fseek(arqFilmes, 0, SEEK_END);
-    salvaFilme(f, arqFilmes);
-    fflush(arqFilmes);
-    free(f);
+    salvaFilme(f, arqFilmes); //grava no disco
+    fflush(arqFilmes); //forca gravacao
+    free(f); // limpa a RAM
 
     printf("Filme cadastrado com sucesso!\n");
 }
 
-// Cadastrar um novo usuario na base
+// Cadastrar um novo usuario na base (mesma logica de filmes)
 void cadastrarUsuario(FILE *arqUsuarios) {
-    int id;
+    int id, comparacoes;
     char nome[50], email[50];
-
+// captar os dados na ram
     printf("\n--- Cadastrar Usuario ---\n");
     printf("ID: ");
     scanf("%d", &id);
     getchar();
+
+    // Verifica se o ID ja existe na base antes de cadastrar
+    TUsuario *existente = buscaSequencialUsuario(id, arqUsuarios, &comparacoes);
+    if (existente != NULL) {
+        printf("Erro: Ja existe um usuario com ID %d na base!\n", id);
+        free(existente);
+        return;
+    }
+
     printf("Nome: ");
     fgets(nome, 50, stdin);
     nome[strcspn(nome, "\n")] = '\0';
@@ -59,10 +86,10 @@ void cadastrarUsuario(FILE *arqUsuarios) {
 
     TUsuario *u = criarUsuario(id, nome, email);
 
-    fseek(arqUsuarios, 0, SEEK_END);
-    salvaUsuario(u, arqUsuarios);
-    fflush(arqUsuarios);
-    free(u);
+    fseek(arqUsuarios, 0, SEEK_END); // posiciona no final
+    salvaUsuario(u, arqUsuarios);// salva no disco
+    fflush(arqUsuarios); // forca gravacao
+    free(u);// libera espaco
 
     printf("Usuario cadastrado com sucesso!\n");
 }
@@ -210,11 +237,11 @@ void buscarFilmesPorDiretor(FILE *arqFilmes) {
     fgets(diretor, 50, stdin);
     diretor[strcspn(diretor, "\n")] = '\0';
 
-    rewind(arqFilmes);
+    rewind(arqFilmes); // leitura do byte zero
     TFilme *f;
 
     while ((f = leFilme(arqFilmes)) != NULL) {
-        if (f->id != -1 && strcmp(f->diretor, diretor) == 0) {
+        if (f->id != -1 && strcmp(f->diretor, diretor) == 0) { // o(n)
             imprimeFilme(f);
             encontrados++;
         }

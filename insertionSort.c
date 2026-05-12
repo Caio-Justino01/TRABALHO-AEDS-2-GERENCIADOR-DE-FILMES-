@@ -5,7 +5,7 @@
 // Ordena arquivo de filmes por id usando insertion sort
 void insertionSortFilmes(FILE *arq, int tam) {
     int i;
-    int t = tamanhoRegistroFilme();
+    int t = tamanhoRegistroFilme();// aarmazena o tamanho exato de registro (192 bytes)
 
     for (int j = 2; j <= tam; j++) {
         fseek(arq, (j - 1) * t, SEEK_SET);
@@ -33,7 +33,7 @@ void insertionSortFilmes(FILE *arq, int tam) {
         free(fi);
     }
 
-    fflush(arq);
+    fflush(arq);//força pra gravar logo no disco 
 }
 
 // Ordena arquivo de usuarios por id usando insertion sort

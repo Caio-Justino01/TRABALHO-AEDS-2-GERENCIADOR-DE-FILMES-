@@ -10,4 +10,5 @@ void salvaLog(FILE *logFile, char *tipoBusca, char *entidade, int chave, int tam
     fprintf(logFile, "Tempo gasto: %.6f segundos\n", tempo);
     fprintf(logFile, "Resultado: %s\n", encontrado ? "Encontrado" : "Nao encontrado");
     fprintf(logFile, "----------------------------------------------\n");
+    fflush(logFile);
 }

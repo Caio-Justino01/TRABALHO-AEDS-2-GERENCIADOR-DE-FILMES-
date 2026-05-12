@@ -1,10 +1,10 @@
 #include "filme.h"
 
-// Cria filme
+// aqui crio um filme no catalogo na moemoria ram
 TFilme *criarFilme(int id, char *titulo, char *diretor, int ano, char *genero, float nota) {
     TFilme *filme = (TFilme *) malloc(sizeof(TFilme));
-    if (filme) memset(filme, 0, sizeof(TFilme));
-    filme->id = id;
+    if (filme) memset(filme, 0, sizeof(TFilme)); // usei o memset para tirar o lixo  que o malloc deixa (0000)
+    filme->id = id; /// vai pro struct
     strcpy(filme->titulo, titulo);
     strcpy(filme->diretor, diretor);
     filme->ano = ano;
@@ -13,21 +13,21 @@ TFilme *criarFilme(int id, char *titulo, char *diretor, int ano, char *genero, f
     return filme;
 }
 
-// Salva filme no arquivo out, na posicao atual do cursor
-void salvaFilme(TFilme *filme, FILE *out) {
-    fwrite(&filme->id, sizeof(int), 1, out);
-    fwrite(filme->titulo, sizeof(char), sizeof(filme->titulo), out);
+// agora pra salvar o filme no hd, na posicao atual do cursor
+void salvaFilme(TFilme *filme, FILE *out) { // esse out ja ta com o cursor apontando para a posi correta
+    fwrite(&filme->id, sizeof(int), 1, out); //copia  os bytes da ram para o hd 
+    fwrite(filme->titulo, sizeof(char), sizeof(filme->titulo), out); // ambos tem tamnho fixo de 100 bytes 
     fwrite(filme->diretor, sizeof(char), sizeof(filme->diretor), out);
     fwrite(&filme->ano, sizeof(int), 1, out);
     fwrite(filme->genero, sizeof(char), sizeof(filme->genero), out);
     fwrite(&filme->nota, sizeof(float), 1, out);
 }
 
-// Le um filme do arquivo in na posicao atual do cursor
+// pra pegar os bytes do HD e remontar a struct na ME RAM
 TFilme *leFilme(FILE *in) {
-    TFilme *filme = (TFilme *) malloc(sizeof(TFilme));
+    TFilme *filme = (TFilme *) malloc(sizeof(TFilme)); // criei uma memoria vazia na ram
     if (0 >= fread(&filme->id, sizeof(int), 1, in)) {
-        free(filme);
+        free(filme); // quando chegar no final e liberar me ram
         return NULL;
     }
     fread(filme->titulo, sizeof(char), sizeof(filme->titulo), in);
@@ -38,7 +38,7 @@ TFilme *leFilme(FILE *in) {
     return filme;
 }
 
-// Imprime filme
+// Imprime filme (na ram)
 void imprimeFilme(TFilme *filme) {
     printf("**********************************************\n");
     printf("Filme de ID: %d\n", filme->id);
@@ -50,7 +50,7 @@ void imprimeFilme(TFilme *filme) {
     printf("**********************************************\n");
 }
 
-// Retorna tamanho do registro de filme em bytes
+// Retorna tamanho do registro de filme em bytes pra ganahr velocidade e ja saber o tamnho correto de cada
 int tamanhoRegistroFilme() {
     return sizeof(int)       // id
            + sizeof(char) * 100  // titulo
@@ -58,13 +58,13 @@ int tamanhoRegistroFilme() {
            + sizeof(int)        // ano
            + sizeof(char) * 30   // genero
            + sizeof(float);     // nota
-}
+} // sem espaço fantasma do compilador 
 
 // Cria a base de dados de filmes
 void criarBaseFilmes(FILE *out, int tam) {
     int vet[tam];
     TFilme *f;
-
+// id nao precisa por que e  pego na ordem do vet, E a nota TBM pq é gerado por embaralhamentro (entre 5.0 e 9.9)
     char *titulos[] = {"O Poderoso Chefao", "Interestelar", "Clube da Luta", "Matrix",
                        "Forrest Gump", "O Senhor dos Aneis", "Batman", "Gladiador",
                        "Titanic", "Jurassic Park"};
@@ -94,7 +94,7 @@ void criarBaseFilmes(FILE *out, int tam) {
 // Embaralha vetor de ids
 void embaralhaFilmes(int *vet, int tam) {
     int tmp;
-    srand(time(NULL));
+    srand(time(NULL)); //usanod o relogio atual do comp como semente (por isso ficadiferente cada vez que o progrma roda)
     int trocas = (tam * 60) / 100;
 
     for (int t = 1; t < trocas; t++) {
@@ -109,17 +109,17 @@ void embaralhaFilmes(int *vet, int tam) {
 // Imprime a base de dados de filmes
 void imprimirBaseFilmes(FILE *out) {
     printf("\nImprimindo a base de dados de filmes...\n");
-    rewind(out);
+    rewind(out); //curosor vai pra pos (0)
     TFilme *f;
     while ((f = leFilme(out)) != NULL) {
         imprimeFilme(f);
-        free(f);
+        free(f);// pratirar os n filmes imprimidos da ram
     }
 }
 
-// Retorna quantidade de registros no arquivo
+// retorna quantidade de filmes existrem cadastrados sem ler um por um 
 int tamanhoArquivoFilmes(FILE *arq) {
     fseek(arq, 0, SEEK_END);
-    int tam = (int)(ftell(arq) / tamanhoRegistroFilme());
+    int tam = (int)(ftell(arq) / tamanhoRegistroFilme()); // usei int(ftell) inves de trunc por questão de velocidade 
     return tam;
 }
