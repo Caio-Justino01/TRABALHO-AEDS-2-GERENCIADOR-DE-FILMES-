@@ -1,0 +1,16 @@
+Tipo de Busca: Sequencial
+Entidade: Filme
+Chave buscada: 50
+Tamanho da base: 100 registros
+Comparacoes realizadas: 50
+Tempo gasto: 0.000008 segundos
+Resultado: Encontrado
+----------------------------------------------
+Tipo de Busca: Binaria
+Entidade: Filme
+Chave buscada: 50
+Tamanho da base: 100 registros
+Comparacoes realizadas: 1
+Tempo gasto: 0.000003 segundos
+Resultado: Encontrado
+----------------------------------------------
