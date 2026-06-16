@@ -1,6 +1,8 @@
 #ifndef OPERACOES_H_INCLUDED
 #define OPERACOES_H_INCLUDED
 
+#include <stdio.h>
+
 // Cadastrar um novo filme na base
 void cadastrarFilme(FILE *arqFilmes);
 
@@ -8,16 +10,16 @@ void cadastrarFilme(FILE *arqFilmes);
 void cadastrarUsuario(FILE *arqUsuarios);
 
 // Atualizar um filme existente na base
-void atualizarFilme(FILE *arqFilmes, int tamBase);
+void atualizarFilme(FILE *arqFilmes);
 
 // Atualizar um usuario existente na base
-void atualizarUsuario(FILE *arqUsuarios, int tamBase);
+void atualizarUsuario(FILE *arqUsuarios);
 
 // Remover um filme (marca como removido com id = -1)
-void removerFilme(FILE *arqFilmes, int tamBase);
+void removerFilme(FILE *arqFilmes);
 
 // Remover um usuario (marca como removido com id = -1)
-void removerUsuario(FILE *arqUsuarios, int tamBase);
+void removerUsuario(FILE *arqUsuarios);
 
 // Buscar filmes por diretor (usando busca sequencial)
 void buscarFilmesPorDiretor(FILE *arqFilmes);

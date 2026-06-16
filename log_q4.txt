@@ -1,0 +1,18 @@
+Log dos testes da Questao 4 - Parte 2
+
+Selection Sort em Disco (Q1) | base=1000 | tempo=1.5980s | comparacoes=499500 | trocas=993
+Selecao com Substituicao (Q2) | base=1000 | M=1000 | particoes=1 | gravados=1000 | comparacoes=999999 | tempo=0.0060s
+Intercalacao Otima (Q3) | particoes=1 | F=4 | fases=0 | gravados=1000 | tempo=0.0000s
+Resumo base=1000 | Selection Sort=1.5990s (medido) | Selecao+Intercalacao=0.0080s
+Selection Sort em Disco (Q1) | base=10000 | tempo=164.0910s | comparacoes=49995000 | trocas=9991
+Selecao com Substituicao (Q2) | base=10000 | M=1000 | particoes=6 | gravados=10000 | comparacoes=9995994 | tempo=0.0550s
+Intercalacao Otima (Q3) | particoes=6 | F=4 | fases=3 | gravados=10000 | tempo=0.0400s
+Resumo base=10000 | Selection Sort=164.0910s (medido) | Selecao+Intercalacao=0.1110s
+Selection Sort em base=100000: EXTRAPOLADO (~15990.0s) - O(N^2) inviavel
+Selecao com Substituicao (Q2) | base=100000 | M=1000 | particoes=51 | gravados=100000 | comparacoes=99950949 | tempo=0.5270s
+Intercalacao Otima (Q3) | particoes=51 | F=4 | fases=25 | gravados=100000 | tempo=0.9270s
+Resumo base=100000 | Selection Sort=15990.0s (extrapolado, O(N^2)) | Selecao+Intercalacao=1.6810s
+Selection Sort em base=500000: EXTRAPOLADO (~399750.0s) - O(N^2) inviavel
+Selecao com Substituicao (Q2) | base=500000 | M=1000 | particoes=245 | gravados=500000 | comparacoes=499744755 | tempo=2.7210s
+Intercalacao Otima (Q3) | particoes=245 | F=4 | fases=122 | gravados=500000 | tempo=5.7270s
+Resumo base=500000 | Selection Sort=399750.0s (extrapolado, O(N^2)) | Selecao+Intercalacao=9.4510s

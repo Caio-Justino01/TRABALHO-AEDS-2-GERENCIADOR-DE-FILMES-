@@ -95,7 +95,7 @@ void cadastrarUsuario(FILE *arqUsuarios) {
 }
 
 // Atualizar um filme existente na base
-void atualizarFilme(FILE *arqFilmes, int tamBase) {
+void atualizarFilme(FILE *arqFilmes) {
     int chave, comparacoes;
 
     printf("\n--- Atualizar Filme ---\n");
@@ -139,7 +139,7 @@ void atualizarFilme(FILE *arqFilmes, int tamBase) {
 }
 
 // Atualizar um usuario existente na base
-void atualizarUsuario(FILE *arqUsuarios, int tamBase) {
+void atualizarUsuario(FILE *arqUsuarios) {
     int chave, comparacoes;
 
     printf("\n--- Atualizar Usuario ---\n");
@@ -173,7 +173,7 @@ void atualizarUsuario(FILE *arqUsuarios, int tamBase) {
 }
 
 // Remover um filme (marca como removido com id = -1)
-void removerFilme(FILE *arqFilmes, int tamBase) {
+void removerFilme(FILE *arqFilmes) {
     int chave, comparacoes;
 
     printf("\n--- Remover Filme ---\n");
@@ -200,7 +200,7 @@ void removerFilme(FILE *arqFilmes, int tamBase) {
 }
 
 // Remover um usuario (marca como removido com id = -1)
-void removerUsuario(FILE *arqUsuarios, int tamBase) {
+void removerUsuario(FILE *arqUsuarios) {
     int chave, comparacoes;
 
     printf("\n--- Remover Usuario ---\n");
@@ -255,7 +255,7 @@ void buscarFilmesPorDiretor(FILE *arqFilmes) {
     }
 }
 
-// Exibir informacoes de um filme buscando pelo id
+// Exibir informacoes de um filme buscando pelo id(os da bsuca de log)
 void exibirFilme(FILE *arqFilmes, FILE *logFile, int tamBase) {
     int chave, comparacoes, tipoBusca;
     clock_t inicio, fim;
@@ -297,7 +297,7 @@ void exibirFilme(FILE *arqFilmes, FILE *logFile, int tamBase) {
     }
 }
 
-// Exibir informacoes de um usuario buscando pelo id
+// Exibir informacoes de um usuario buscando pelo id (os da bsuca de log)
 void exibirUsuario(FILE *arqUsuarios, FILE *logFile, int tamBase) {
     int chave, comparacoes, tipoBusca;
     clock_t inicio, fim;

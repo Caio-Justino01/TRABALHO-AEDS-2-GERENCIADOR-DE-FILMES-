@@ -1,0 +1,3 @@
+Selection Sort em Disco (Q1) | base=1000 | tempo=1.5620s | comparacoes=499500 | trocas=995
+Selecao com Substituicao (Q2) | base=1000 | M=1000 | particoes=1 | gravados=1000 | comparacoes=999999 | tempo=0.0060s
+Intercalacao Otima (Q3) | particoes=1 | F=4 | fases=0 | gravados=1000 | tempo=0.0000s

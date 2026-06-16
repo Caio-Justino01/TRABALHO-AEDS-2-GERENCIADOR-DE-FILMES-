@@ -53,7 +53,7 @@ void criarBaseUsuarios(FILE *out, int tam) {
     char *nomes[] = {"Ana Silva", "Bruno Costa", "Carlos Lima", "Diana Souza",
                      "Eduardo Santos", "Fernanda Reis", "Gabriel Alves", "Helena Rocha",
                      "Igor Mendes", "Julia Ferreira"};
-    char *dominios[] = {"gmail.com", "hotmail.com", "yahoo.com", "outlook.com", "ufop.edu.br"};
+    char *dominios[] = {"gmail.com", "hotmail.com", "yahoo.com", "outlook.com", "ufop.edu.br", "gmail.com", "hotmail.com", "yahoo.com", "outlook.com", "ufop.edu.br"};
 
     for (int i = 0; i < tam; i++)
         vet[i] = i + 1;

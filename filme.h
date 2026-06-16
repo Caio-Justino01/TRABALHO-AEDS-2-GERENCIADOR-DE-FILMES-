@@ -34,6 +34,9 @@ int tamanhoRegistroFilme();
 // Cria a base de dados de filmes
 void criarBaseFilmes(FILE *out, int tam);
 
+// Cria base desordenada de filmes para a Parte 2
+void criarBaseFilmesDesordenada(FILE *out, int tam, int silencio);
+
 // Embaralha vetor de ids
 void embaralhaFilmes(int *vet, int tam);
 
